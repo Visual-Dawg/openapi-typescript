@@ -91,8 +91,21 @@ export default function createClient<Paths extends {}>(clientOptions: ClientOpti
       body: typeof requestBody === "string" ? requestBody : JSON.stringify(requestBody),
     });
 
+    const contentType = response.headers.get("content-type");
+
+    let body: any;
+
     // don’t parse JSON if status is 204, or Content-Length is '0'
-    const body = response.status === 204 || response.headers.get("Content-Length") === "0" ? {} : await response.json();
+    if (response.status === 204 || response.headers.get("Content-Length") === "0") {
+      body = {};
+    } else if (contentType === "application/json") {
+      body = await response.json();
+      console.log("Received json", body);
+    } else {
+      body = { data: await response.text() };
+      console.log("Received text", body);
+    }
+
     return response.ok ? { data: body, response } : { error: body, response: response };
   }
 
