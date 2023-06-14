@@ -8,6 +8,8 @@
     "email": "drew@pow.rs"
   },
   "scripts": {
+    "install": "cd packages/openapi-fetch && pnpm install",
+    "postinstall": "cd packages/openapi-fetch/dist",
     "build": "run-p -s build:*",
     "build:clean": "del packages/openapi-typescript/dist && del packages/openapi-fetch/dist",
     "build:ts": "tsc -b packages/openapi-typescript/tsconfig.build.json packages/openapi-fetch/tsconfig.build.json",
