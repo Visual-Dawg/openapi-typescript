@@ -9,7 +9,7 @@
   },
   "main": "./packages/openapi-fetch/dist/index.js",
   "scripts": {
-    "postinstall": "cd packages/openapi-fetch && pnpm install && pnpm build",
+    "postinstall": "echo 'Hii' && cd packages/openapi-fetch && pnpm install && pnpm build",
     "build": "run-p -s build:*",
     "build:clean": "del packages/openapi-typescript/dist && del packages/openapi-fetch/dist",
     "build:ts": "tsc -b packages/openapi-typescript/tsconfig.build.json packages/openapi-fetch/tsconfig.build.json",
